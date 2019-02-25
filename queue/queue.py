@@ -23,12 +23,14 @@ class Queue:
       if self.head == None:
         self.head = newLink
     else:
+      print('self.tail: ', self.tail.data)
       newLink.prev = self.tail
       self.tail.next = newLink
       self.tail = newLink
 
   
   def dequeue(self):
+    print('self.head: ', self.head.data)
     if self.head == None:
       return None
     value = self.head.data
