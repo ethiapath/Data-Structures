@@ -35,7 +35,8 @@ class Queue:
     print('self.head: ', self.head.data)
     value = self.head.data
     self.head = self.head.next
-    self.head.prev = None
+    if self.head != None:
+      self.head.prev = None
     self.size -= 1
     return value
 
