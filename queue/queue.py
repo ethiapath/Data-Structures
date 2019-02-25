@@ -1,5 +1,5 @@
-class link:
-  def __init__(self, data, nextNode, prev):
+class Link:
+  def __init__(self, data, nextNode=None, prev=None):
     self.data = data
     self.next = nextNode
     self.prev = prev
@@ -9,26 +9,33 @@ class Queue:
     self.size = 0
     # what data structure should we
     # use to store queue elements?
-    # a doubly linked list
+    # a doubly Linked list
     self.head = None
     self.tail = None
     self.length = 0
 
-  def enqueue(self, link):
-    # set link 
-    link.prev = self.HEAD
-    self.head.next = link
-    self.head = link
-    self.length += 1
-    pass
+  def enqueue(self, value):
+	# set Link
+    newLink = Link(value)
+    self.size = self.size + 1
+    if self.tail == None:
+      self.tail = newLink
+      if self.head == None:
+        self.head = newLink
+    else:
+      newLink.prev = self.tail
+      self.tail.next = newLink
+      self.tail = newLink
+
   
   def dequeue(self):
-    value = self.TAIL.data
-    self.TAIL = self.TAIL.prev
-    self.length -= 1
+    if self.head == None:
+      return None
+    value = self.head.data
+    self.head = self.head.next
+    self.head.prev = None
+    self.size -= 1
     return value
-    pass
 
   def len(self):
-    return self.length
-    pass
+    return self.size
