@@ -30,9 +30,9 @@ class Queue:
 
   
   def dequeue(self):
-    print('self.head: ', self.head.data)
     if self.head == None:
       return None
+    print('self.head: ', self.head.data)
     value = self.head.data
     self.head = self.head.next
     self.head.prev = None
