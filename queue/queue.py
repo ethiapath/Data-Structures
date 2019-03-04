@@ -5,12 +5,17 @@ class Queue:
     # use to store queue elements?
     # a list?
     self.storage = []
+    self.length = 0
 
   def enqueue(self, item):
-    self.storage.append(item)
+    self.length += 1
+    self.storage.insert(0, item)
   
   def dequeue(self):
-    pass
+    if self.length == 0:
+      return None
+    self.length -= 1
+    return self.storage.pop()
 
   def len(self):
-    pass
+    return self.length
