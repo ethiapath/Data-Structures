@@ -1,5 +1,5 @@
 class Link:
-  def __init__(self, data, nextNode, prev):
+  def __init__(self, data, nextNode=None, prev=None):
     self.data = data
     self.next = nextNode
     self.prev = prev
@@ -15,21 +15,30 @@ class Queue:
     self.length = 0
 
   def enqueue(self, value):
-    # set Link 
+	# set Link
     newLink = Link(value)
-    Link.prev = self.HEAD
-    self.head.next = Link
-    self.head = Link
-    self.length += 1
-    pass
+    self.size = self.size + 1
+    if self.tail == None:
+      self.tail = newLink
+      if self.head == None:
+        self.head = newLink
+    else:
+      print('self.tail: ', self.tail.data)
+      newLink.prev = self.tail
+      self.tail.next = newLink
+      self.tail = newLink
+
   
   def dequeue(self):
-    value = self.TAIL.data
-    self.TAIL = self.TAIL.prev
-    self.length -= 1
+    if self.head == None:
+      return None
+    print('self.head: ', self.head.data)
+    value = self.head.data
+    self.head = self.head.next
+    if self.head != None:
+      self.head.prev = None
+    self.size -= 1
     return value
-    pass
 
   def len(self):
-    return self.length
-    pass
+    return self.size

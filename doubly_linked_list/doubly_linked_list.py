@@ -38,32 +38,36 @@ class DoublyLinkedList:
   def __init__(self, node=None):
     self.head = node
     self.tail = node
+    self.max = 0
 
   def add_to_head(self, value):
+    if value > self.max:
+      self.max = value
     if self.head == None:
         newLinkNode = ListNode(value)
-        self.head.insert_before(newLinkNode)
-        self.head = self.head.prev #newLinkNode
+        self.head = newLinkNode
         # first node case
         if self.tail == None:
             self.tail = newLinkNode
     else:
         self.head.insert_before(value)
-    return self.head.value
+    return self.head.__dict__['value']
 
   def remove_from_head(self):
-    if self.head != None:
+    if self.head == None:
+        return None
+    else:
         old_head = self.head
-        self.head = self.head.next
-        self.head.delete()
-        return old_head.value
-    self.head.delete()
+        self.head = self.head.__dict__['next']
+        old_head.delete()
+        return old_head.__dict__['value']
 
   def add_to_tail(self, value):
+    if value > self.max:
+      self.max = value
     if self.tail == None:
         newLinkNode = ListNode(value)
-        self.tail.insert_after(newLinkNode)
-        self.tail = self.tail.next #newLinkNode
+        self.tail = newLinkNode
         # first node case
         if self.head == None:
             self.head = newLinkNode
@@ -96,10 +100,19 @@ class DoublyLinkedList:
     node.delete()
 
   def get_max(self):
+    return self.max
+  '''
     currentNode = self.head
     maxVal = 0
-    while currentNode.next:
+    while currentNode.next != None:
         if currentNode.value > maxVal:
-            maxVal = currentNode.value
-        currentNode = currentNode.next
+            maxVal = currentNode.__dict__['value']
+        currentNode = currentNode.__dict__['next']
     return maxVal
+'''
+
+
+dll = DoublyLinkedList(ListNode(2))
+dll.add_to_head(3)
+print(dll.head.value)
+
