@@ -7,7 +7,7 @@ class Queue:
     self.storage = []
 
   def enqueue(self, item):
-    pass
+    self.storage.append(item)
   
   def dequeue(self):
     pass
