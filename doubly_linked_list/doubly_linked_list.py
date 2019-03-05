@@ -42,13 +42,12 @@ class DoublyLinkedList:
 
   def add_to_head(self, value):
     if value > self.max:
-      print(value)
       self.max = value
     new_link = ListNode(value)
     if self.head == None:
       self.head = new_link
       if self.tail == None:
-        self.tail = new_link     
+        self.tail = new_link
     else:
       self.head.insert_before(value)
       self.head = self.head.prev
@@ -66,7 +65,6 @@ class DoublyLinkedList:
 
   def add_to_tail(self, value):
     if value > self.max:
-      print(value)
       self.max = value
     new_link = ListNode(value)
     if self.tail == None:
