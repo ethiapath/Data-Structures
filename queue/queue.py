@@ -17,9 +17,9 @@ class Queue:
 
   '''
   tail            head    .next
-  __      __      __      __
+   __      __      __      __
   |  | -> |  | -> |  | -> |  |
-  --      --      --      --
+   --      --      --      --
   '''
   def enqueue(self, item): # add to head
     self.length += 1
@@ -34,9 +34,9 @@ class Queue:
 
   '''
   temp    tail            head
-  __      __      __      __
+   __      __      __      __
   |  | -> |  | -> |  | -> |  |
-  --      --      --      --
+   --      --      --      --
   '''
 
   def dequeue(self): # remove from tail
