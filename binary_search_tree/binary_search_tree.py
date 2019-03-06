@@ -5,35 +5,35 @@ class BinarySearchTree:
     self.right = None
 
   def insert(self, value):
-    print('inserting:', value)
-    if value >= self.value:
-      if self.right == None:
-        self.right = BinarySearchTree(value)
-      else:
-        self.right.insert(value)
-    else:
-      if self.left == None:
-        self.left = BinarySearchTree(value)
-      else:
+    # print('inserting:', value)
+    
+    if (value < self.value):
+      if (self.left):
         self.left.insert(value)
+      else:
+        self.left = BinarySearchTree(value)
+    else:
+      if (self.right):
+        self.right.insert(value)
+      else:
+        self.right = BinarySearchTree(value)
 
   def contains(self, target):
-    if self.value == target:
-      print('found', target)
+    if (self.value == target):
+      # print('found', target)
       return True
-
-    print('contain rec', self.value, 'target', target, 'left', self.left.value, 'right', self.right.value)
-
-    if target >= self.value:
-      if self.right == None:
+    # print('searching for', target)
+    # print('contain rec', self.value, 'target', target, 'left', self.left.value, 'right', self.right.value)
+    if (target < self.value):
+      if (self.left is None):
         return False
       else:
-        self.right.contains(target)
+        return self.left.contains(target)
     else:
-      if self.left == None:
+      if (self.right is None):
         return False
       else:
-        self.left.contains(target)
+        return self.right.contains(target)
 
   def inOrder(self):
     if self.left != None:
@@ -42,8 +42,15 @@ class BinarySearchTree:
     if self.right != None:
       self.right.inOrder()
 
+  def preOrder(self):
+    # print(self.value)
+    if self.left != None:
+      self.left.inOrder()
+    if self.right != None:
+      self.right.preOrder()
+
   def get_max(self):
-    if self.right == None:
-      return self.value
+    if self.right != None:
+      return self.right.get_max()
     else:
-      self.right.get_max()
+      return self.value
