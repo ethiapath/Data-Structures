@@ -38,71 +38,91 @@ class DoublyLinkedList:
   def __init__(self, node=None):
     self.head = node
     self.tail = node
-    self.max = 0
+    self.length = 0
+    # self.max = 0
 
   def add_to_head(self, value):
-    if value > self.max:
-      self.max = value
-    new_link = ListNode(value)
+    # if value > self.max.value:
+    #   self.max = value
+    # if self.length == 0:
+    #   self.head = self.tail = ListNode(value)
     if self.head == None:
-      self.head = new_link
+      self.head = ListNode(value)
       if self.tail == None:
-        self.tail = new_link
+        self.tail = self.head
+
     else:
       self.head.insert_before(value)
       self.head = self.head.prev
+    self.length += 1
 
   def remove_from_head(self):
-    head_value = self.head.value
     if self.head == None:
       return None
+
+    # is_max = False
+    # if self.head.value == self.max:
+    #   is_max = True
+
     old_head = self.head
     if self.head.next:
       self.head = self.head.next
+    head_value = old_head.value
     old_head.delete()
+    # if is_max:
+    #   self.max = _get_max_node_linear().value
+    self.length -= 1
     return head_value
 
 
   def add_to_tail(self, value):
-    if value > self.max:
-      self.max = value
-    new_link = ListNode(value)
-    if self.tail == None:
-      self.tail = new_link
-      if self.head == None:
-        self.head = new_link
+    # if value > self.max:
+    #   self.max = value
+    if self.length == 0:
+      self.head = self.tail = ListNode(value)
     else:
       self.tail.insert_after(value)
       self.tail = self.tail.next
+    self.length += 1
 
   def remove_from_tail(self):
-    tail_value = self.tail.value
     if self.tail == None:
       return None
+    # is_max = False
+    # if self.head.value == self.max:
+    #   is_max = True
+    tail_value = self.tail.value
     if self.tail.prev:
       self.tail = self.tail.prev
-    self.tail.next.delete()
+    if self.tail.next:
+      self.tail.next.delete()
+    # if is_max:
+    #   self.max = _get_max_node_linear().value
+    self.length -= 1
     return tail_value
 
   def move_to_front(self, node):
     node.delete()
     self.add_to_head(node.value)
-    pass
 
   def move_to_end(self, node):
     node.delete()
     self.add_to_tail(node.value)
-    pass
 
   def delete(self, node):
 
     pass
     
-  def get_max(self):
+  def _get_max_node_linear(self):
+    # get max becomes O(n)
     current_node = self.head
-    max_val = 0
+    max_node = ListNode(0)
     while current_node:
-      if current_node.value > max_val:
-        max_val = current_node.value
+      if current_node.value > max_node.value:
+        max_node = current_node
       current_node = current_node.next
-    return max_val
+    return max_node
+
+  def get_max(self):
+    # get max becomes O(n)
+    return self._get_max_node_linear().value
