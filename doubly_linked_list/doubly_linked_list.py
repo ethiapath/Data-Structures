@@ -48,15 +48,14 @@ class DoublyLinkedList:
     self.head = node
     self.tail = node
     self.length = 0
+    if node != None:
+      self.length += 1
     # self.max = 0
 
   def add_to_head(self, value):
-    # if self.length == 0:
-    #   self.head = self.tail = ListNode(value)
-    if self.head == None:
-      self.head = ListNode(value)
-      if self.tail == None:
-        self.tail = self.head
+    if self.length == 0:
+      self.head = self.tail = ListNode(value)
+
     else:
       print('adding', value, 'to head')
       self.head.insert_before(value)
@@ -67,12 +66,9 @@ class DoublyLinkedList:
   def add_to_tail(self, value):
     # if value > self.max:
     #   self.max = value
-    # if self.length == 0:
-    #   self.head = self.tail = ListNode(value)
-    if self.tail == None:
-      self.tail = ListNode(value)
-      if self.head == None:
-        self.head = self.tail
+    if self.length == 0:
+      self.head = self.tail = ListNode(value)
+
     else:
       print('adding', value, 'to tail')
       self.tail.insert_after(value)
