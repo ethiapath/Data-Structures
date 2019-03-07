@@ -1,8 +1,9 @@
-import time
+# import time
 class Heap:
-  def __init__(self):
+  def __init__(self, compare):
     self.storage = []
     self.length = 0
+    self.compare = compare
 
   def insert(self, value):
     self.storage.append(value)
@@ -10,26 +11,18 @@ class Heap:
     self._bubble_up(len(self.storage)-1)
 
   def delete(self):
-    print('start delete', self.storage)
-    time.sleep(0.1)
-    print(self.storage)
+    # print('start delete', self.storage)
+    # time.sleep(0.1)
     self._swap(0, len(self.storage)-1)
+    # print(self.storage)
     max = self.storage.pop()
-    print(self.storage)
     self.length -= 1
-    print(self.storage)
+    # print(self.storage)
     self._sift_down(0)
     return max
 
   def get_max(self):
     return self.storage[0]
-    '''
-    # get max value
-    largests_ele = self.storage[0]
-    # move last value to front
-    self.storage[0] = self.storage[self.get_size-1]
-    '''
-    pass
 
   def get_size(self):
     return len(self.storage)
@@ -37,7 +30,7 @@ class Heap:
   def _bubble_up(self, index):
     parent = self._get_parent_index(index)
 
-    if self.storage[parent] < self.storage[index]:
+    if self.compare(self.storage[index], self.storage[parent]):
       self._swap(parent, index)
 
     if parent <= 0:
@@ -53,24 +46,21 @@ class Heap:
       index = parent
     '''
 
-
   def _sift_down(self, index):
-    time.sleep(0.1)
+    # time.sleep(0.1)
     child = self._get_left_index(index)
-
-
     if child > len(self.storage)-1:
       return
-    print('index:', index, 'value:', self.storage[index], 'heap:', self.storage)
+    # print('index:', index, 'value:', self.storage[index], 'heap:', self.storage)
     # if right child exists then if it's greater set it as child
-    left = True
-    if (child + 1 <= len(self.storage)-1) and (self.storage[child+1] > self.storage[child]):
+    # left = True
+    if (child + 1 <= len(self.storage)-1) and self.compare(self.storage[child+1], self.storage[child]):
       child += 1
     
-    if not left:
-      print('go right')
-    else:
-      print('go left')
+    # if not left:
+    #   print('go right')
+    # else:
+    #   print('go left')
 
     if self.storage[index] < self.storage[child]:
       self._swap(index, child)
@@ -95,14 +85,6 @@ class Heap:
 
   def _swap(self, a, b): # a and b are indexes
     self.storage[a],self.storage[b] = self.storage[b],self.storage[a]
-    '''
-    temp = self.storage[a]
-    self.storage[a] = self.storage[b]
-    self.storage[b] = temp
-    '''
-
-  def _get_length(self):
-    return self.length#len(self.storage)-1
 
   def _get_left_index(self, index):
     return (index*2)+1
