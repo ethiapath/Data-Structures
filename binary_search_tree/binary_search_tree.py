@@ -1,3 +1,4 @@
+import time
 class BinarySearchTree:
   def __init__(self, value):
     self.value = value
@@ -39,11 +40,12 @@ class BinarySearchTree:
     if self.left != None:
       self.left.inOrder()
     print(self.value)
+    # time.sleep(0.5)
     if self.right != None:
       self.right.inOrder()
 
   def preOrder(self):
-    # print(self.value)
+    print(self.value)
     if self.left != None:
       self.left.inOrder()
     if self.right != None:
