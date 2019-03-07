@@ -30,7 +30,6 @@ class Queue:
     else:
       self.head.next = Node(item)
       self.head = self.head.next
-      # self.storage.insert(0, item)
 
   '''
   temp    tail            head
@@ -47,7 +46,6 @@ class Queue:
     old_tail.next = None # remove ref for gc
     self.length -= 1
     return old_tail.value
-    # return self.storage.pop()
 
   def len(self):
     return self.length

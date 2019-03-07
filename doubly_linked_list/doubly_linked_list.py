@@ -36,6 +36,8 @@ class ListNode:
       outstr = ''
       if self.prev:
         outstr += str(self.prev.value) + ' <-prev | '
+      else:
+        outstr += '\t   '
       outstr += 'current_node: ' + str(self.value)
       if self.next:
         outstr += ' | next-> ' + str(self.next.value)
@@ -50,27 +52,20 @@ class DoublyLinkedList:
     self.length = 0
     if node != None:
       self.length += 1
-    # self.max = 0
 
   def add_to_head(self, value):
     if self.length == 0:
       self.head = self.tail = ListNode(value)
-
     else:
-      print('adding', value, 'to head')
       self.head.insert_before(value)
       self.head = self.head.prev
     self.length += 1
 
 
   def add_to_tail(self, value):
-    # if value > self.max:
-    #   self.max = value
     if self.length == 0:
       self.head = self.tail = ListNode(value)
-
     else:
-      print('adding', value, 'to tail')
       self.tail.insert_after(value)
       self.tail = self.tail.next
     self.length += 1
@@ -78,11 +73,6 @@ class DoublyLinkedList:
   def remove_from_head(self):
     if self.head == None:
       return None
-
-    # is_max = False
-    # if self.head.value == self.max:
-    #   is_max = True
-
     old_head = self.head
     if self.head.next:
       self.head = self.head.next
@@ -102,9 +92,8 @@ class DoublyLinkedList:
     old_tail = self.tail
     if self.tail.prev:
       self.tail = self.tail.prev
-    if self.tail.next:
-      self.tail.next.delete()
     tail_value = old_tail.value
+    old_tail.delete()
     # if is_max:
     #   self.max = _get_max_node_linear().value
     self.length -= 1
@@ -127,9 +116,15 @@ class DoublyLinkedList:
     self.add_to_tail(node.value)
 
   def delete(self, node):
+    node.delete()
+    '''
+    if not node:
+      return 1
+    next_node = node.next
+    node.delete()
+    self.delete(node)
+    '''
 
-    pass
-    
   def _get_max_node_linear(self):
     # get max becomes O(n)
     current_node = self.head
@@ -151,12 +146,3 @@ class DoublyLinkedList:
     while current_node != None:
       current_node._print()
       current_node = current_node.next
-      '''
-      outstr = ''
-      if current_node.prev:
-        outstr += str(current_node.prev.value) + ' <-prev | '
-      outstr += 'current_node: ' + str(current_node.value)
-      if current_node.next:
-        outstr += ' | next-> ' + str(current_node.next.value)
-      print(outstr)
-      '''

@@ -1,4 +1,3 @@
-# import time
 class Heap:
   def __init__(self, compare):
     self.storage = []
@@ -11,13 +10,9 @@ class Heap:
     self._bubble_up(len(self.storage)-1)
 
   def delete(self):
-    # print('start delete', self.storage)
-    # time.sleep(0.1)
     self._swap(0, len(self.storage)-1)
-    # print(self.storage)
     max = self.storage.pop()
     self.length -= 1
-    # print(self.storage)
     self._sift_down(0)
     return max
 
@@ -51,17 +46,8 @@ class Heap:
     child = self._get_left_index(index)
     if child > len(self.storage)-1:
       return
-    # print('index:', index, 'value:', self.storage[index], 'heap:', self.storage)
-    # if right child exists then if it's greater set it as child
-    # left = True
     if (child + 1 <= len(self.storage)-1) and self.compare(self.storage[child+1], self.storage[child]):
       child += 1
-    
-    # if not left:
-    #   print('go right')
-    # else:
-    #   print('go left')
-
     if self.storage[index] < self.storage[child]:
       self._swap(index, child)
       self._sift_down(child)
