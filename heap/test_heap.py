@@ -4,7 +4,9 @@ from heap import Heap
 
 class HeapTests(unittest.TestCase):
   def setUp(self):
-    self.heap = Heap()
+    min_compare = lambda a, b : a < b
+    max_comapre = lambda a, b : a > b
+    self.heap = Heap(max_comapre)
 
   def test_heap_insert_works(self):
     self.heap.insert(6)
