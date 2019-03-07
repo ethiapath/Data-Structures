@@ -10,15 +10,16 @@ class Heap:
     self._bubble_up(len(self.storage)-1)
 
   def delete(self):
-    print('start delete')
-    time.sleep(0.5)
-    root = self.storage[0]
-    last = self.storage[len(self.storage)-1]
+    print('start delete', self.storage)
+    time.sleep(0.1)
+    print(self.storage)
     self._swap(0, len(self.storage)-1)
+    max = self.storage.pop()
+    print(self.storage)
     self.length -= 1
-    self.storage[0] = self.storage[len(self.storage)-1]
+    print(self.storage)
     self._sift_down(0)
-    return root
+    return max
 
   def get_max(self):
     return self.storage[0]
@@ -54,12 +55,13 @@ class Heap:
 
 
   def _sift_down(self, index):
-    print('index:', index, 'value:', self.storage[index], 'heap:', self.storage)
-    time.sleep(0.5)
+    time.sleep(0.1)
     child = self._get_left_index(index)
+
 
     if child > len(self.storage)-1:
       return
+    print('index:', index, 'value:', self.storage[index], 'heap:', self.storage)
     # if right child exists then if it's greater set it as child
     left = True
     if (child + 1 <= len(self.storage)-1) and (self.storage[child+1] > self.storage[child]):
@@ -92,9 +94,12 @@ class Heap:
     '''
 
   def _swap(self, a, b): # a and b are indexes
+    self.storage[a],self.storage[b] = self.storage[b],self.storage[a]
+    '''
     temp = self.storage[a]
     self.storage[a] = self.storage[b]
     self.storage[b] = temp
+    '''
 
   def _get_length(self):
     return self.length#len(self.storage)-1
